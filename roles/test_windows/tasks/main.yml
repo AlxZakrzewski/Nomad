@@ -1,0 +1,4 @@
+- include: roles/test_windows/tasks/copy.yml
+  tags: [tagged, copy]
+- include: roles/test_windows/tasks/housekeeping.yml
+  tags: [tagged, housekeeping]

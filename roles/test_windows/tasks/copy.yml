@@ -1,0 +1,4 @@
+- name: Copy file with owner and permissions
+  win_copy:
+    src: /cs/fiwmrisk/roles/test_windows/files/file.txt
+    dest: C:\test

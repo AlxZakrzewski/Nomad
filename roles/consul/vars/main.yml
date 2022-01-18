@@ -1,0 +1,12 @@
+#---------------------------------- Overall ----------------------------------#
+consul_url: "https://releases.hashicorp.com/consul/1.10.1/consul_{{ consul_version }}_linux_amd64.zip"
+consul_app_linpath: "{{ app_linpath }}consul/{{ consul_version }}/"
+consul_binary_linpath: "{{ bin_linpath }}consul"
+consul_config_linpath: "{{ consul_app_linpath }}config/"
+consul_data_linpath: "/cs/app/"
+consul_log_linpath: "{{ consul_app_linpath }}log/"
+consul_start_args: "-config {{ consul_config_linpath }}"
+consul_zip_linpath: "{{ bin_linpath }}{{ consul_zip }}"
+consul_zip: "consul_{{ consul_version }}_linux_amd64.zip"
+consul_user: "fiwmrisk"
+consul_version: "1.10.1"

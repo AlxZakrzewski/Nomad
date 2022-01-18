@@ -1,0 +1,114 @@
+- name: Create Bin directory
+  file:
+    dest: "{{ bin_linpath }}"
+    state: directory
+
+- name: Create folder structure
+  file:
+    path: "{{ consul_app_linpath }}{{ item }}"
+    state: directory
+  loop:
+    - config
+    - log 
+
+- name: Register $PATH as var
+  shell: echo $PATH
+  register: path 
+
+- set_fact:
+    path_list: "{{ path.stdout.split(':') }}"
+
+- name: Add {{ bin_linpath }} to .bashrc 
+  lineinfile: 
+    dest: "{{ shell_files.bashrc.linpath }}"
+    line: 'export PATH={{ bin_linpath }}:$PATH'
+    insertafter: EOF
+  when: bin_linpath not in path_list
+
+- name: Download consul zip file
+  get_url: 
+    url: "{{ consul_url }}"
+    dest: "{{ bin_linpath }}"
+    mode: 0750
+
+- name: Uncompress source compressed file
+  unarchive:
+    src: "{{ consul_zip_linpath }}"
+    dest: "{{ bin_linpath }}"
+    remote_src: yes
+
+- name: Remove compressed file
+  file: 
+    path: "{{ consul_zip_linpath }}"
+    state: absent
+
+- name: Check consul executable is present 
+  shell: "consul --version"
+  register: result
+  ignore_errors: true
+
+- fail:
+    msg: "consul is not found!"
+  when: result.rc != 0
+
+- name: Create consul user
+  become: yes
+  shell: "useradd --system --home /etc/consul.d --shell /bin/false consul"
+  ignore_errors: true
+
+- name: Create data dir
+  shell: "mkdir --parents /cs/app/consul/"
+
+- name: Change permissions
+  become: yes
+  shell: "chown --recursive consul:consul /cs/app/consul/"
+
+- name: Create configs
+  become: yes 
+  shell: "mkdir --parents /etc/consul.d" 
+
+- name: Generate encryption key
+  shell: "consul keygen > encyption.key"
+
+- name: Create a CA
+  shell: "consul tls ca create"
+  ignore_errors: true
+
+- name: Create server certificates
+  shell: "consul tls cert create -server -dc dc1"
+  ignore_errors: true
+
+- name: Create client certificates
+  shell: "consul tls cert create -client -dc dc1"
+  ignore_errors: true
+
+- name: Copy certs to other machines
+  become: yes
+  shell: "cp /cs/fiwmrisk/consul-agent-ca.pem /cs/fiwmrisk/dc1-server-consul-0.pem /cs/fiwmrisk/dc1-server-consul-0-key.pem /etc/consul.d/"
+
+- name: Copy consul.hcl into Consul server
+  become: yes
+  template:
+    src: consul.hcl
+    dest: "/etc/consul.d/consul.hcl"
+    mode: 0755
+
+- name: Copy server.hcl into Consul server
+  become: yes
+  template:
+    src: server.hcl
+    dest: "/etc/consul.d/server.hcl"
+    mode: 0755
+
+- name: Change ownership of consul.d
+  become: yes
+  shell: "chown --recursive consul:consul /etc/consul.d"
+
+- name: Check consul config
+  shell: "consul --version"
+  register: result
+  ignore_errors: true
+
+- debug: msg="{{ result.stdout }}"
+
+- debug: msg="{{ result.stderr }}"

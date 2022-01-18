@@ -1,0 +1,12 @@
+---
+
+- name: Deploy consul
+  gather_facts: yes
+  hosts: "{{ host_group }}"
+  vars_files:
+    - group_vars/linux.yml
+  tasks:
+    - include: roles/consul/tasks/setup.yml
+      tags: setup
+    - include: roles/consul/tasks/service.yml
+      tags: service     

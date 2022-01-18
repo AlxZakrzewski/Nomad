@@ -1,0 +1,86 @@
+- name: Create Bin directory
+  file:
+    dest: "{{ bin_linpath }}"
+    state: directory
+
+- name: Create folder structure
+  file:
+    path: "{{ nomad_app_linpath }}{{ item }}"
+    state: directory
+  loop:
+    - config
+    - log 
+
+- name: Register $PATH as var
+  shell: echo $PATH
+  register: path 
+
+- set_fact:
+    path_list: "{{ path.stdout.split(':') }}"
+
+- name: Add {{ bin_linpath }} to .bashrc 
+  lineinfile: 
+    dest: "{{ shell_files.bashrc.linpath }}"
+    line: 'export PATH={{ bin_linpath }}:$PATH'
+    insertafter: EOF
+  when: bin_linpath not in path_list
+
+- name: Download Nomad zip file
+  get_url: 
+    url: "{{ nomad_url }}"
+    dest: "{{ bin_linpath }}"
+    mode: 0750
+
+- name: Uncompress source compressed file
+  unarchive:
+    src: "{{ nomad_zip_linpath }}"
+    dest: "{{ bin_linpath }}"
+    remote_src: yes
+
+- name: Remove compressed file
+  file: 
+    path: "{{ nomad_zip_linpath }}"
+    state: absent
+
+- name: Check Nomad executable is present 
+  shell: "nomad --version"
+  register: result
+  ignore_errors: true
+
+- fail:
+    msg: "Nomad is not found!"
+  when: result.rc != 0
+
+- name: Copy base.hcl 
+  template:
+    src: base.hcl
+    dest: "{{ nomad_config_linpath }}base.hcl"
+    mode: 0755
+
+- name: Copy client.hcl into Nomad Client
+  template:
+    src: client.hcl
+    dest: "{{ nomad_config_linpath }}client.hcl"
+    mode: 0755
+  when: nomad_client | default('False')   
+
+- name: Copy server.hcl into Nomad Client
+  template:
+    src: server.hcl
+    dest: "{{ nomad_config_linpath }}server.hcl"
+    mode: 0755
+  when: nomad_server | default('False')
+
+- name: Copy nomad.service 
+  become: yes 
+  template:
+    src: nomad.service
+    dest: "/etc/systemd/system/nomad.service"
+    mode: 0755
+ 
+- name: Restart service nomad
+  become: yes
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    name: nomad

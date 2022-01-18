@@ -1,0 +1,11 @@
+#---------------------------- Linux paths and files --------------------------#
+app_linpath: "{{ ansible_user_dir }}/app/"
+appdata_linpath: "{{ ansible_user_dir }}/appdata/"
+bin_linpath: "{{ ansible_user_dir }}/bin/"
+shell_files:
+  bashrc:
+    file: ".bashrc"
+    linpath: "{{ ansible_user_dir }}/.bashrc"
+  bash_profile:
+    file: ".bash_profile"  
+    linpath: "{{ ansible_user_dir }}/.bashrc"

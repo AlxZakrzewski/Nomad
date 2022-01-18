@@ -1,0 +1,37 @@
+- name: Register list of Elrond packages in {{ housekeeping_path }}
+  win_find:
+    paths: '{{ housekeeping_path }}'
+    file_type: directory
+    patterns: Elrond*
+  register: dirs
+
+- fail:
+    msg: This is NONPROD environment and there are 5 or less packages!
+  when: dirs.matched <= 5 and environment_type != 'PROD'   
+
+- fail:
+    msg: This is PROD environment and there are 3 or less packages!
+  when: dirs.matched <= 3 and environment_type == 'PROD' 
+
+- name: Sort folders by last modified date
+  debug:
+    msg: "{{ dirs.files | sort(attribute='lastwritetime', reverse = True) }}"
+  register: sdirs_files
+
+- name: Print Twoja Stara
+  debug:
+    msg: "{{ sdirs_files }}"
+
+- name: Register last modified date baseline of folders on NONPROD
+  debug:
+    msg: "{{ sdirs_files.msg[4]['lastwritetime'] }}"
+  register: lmd_base
+  when: environment_type != 'PROD'
+
+- name: Create a list folders to remove
+  debug: 
+    msg: "{{ item | selectattr('lastwritetime', 'gt', lmd_base) }}"
+  loop: dirs_files.msg
+  register: dirs_to_remove
+
+- name: Execute clean up

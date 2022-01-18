@@ -1,0 +1,10 @@
+#---------------------------------- Overall ----------------------------------#
+nomad_url: "https://releases.hashicorp.com/nomad/1.1.3/nomad_1.1.3_linux_amd64.zip"
+nomad_app_linpath: "{{ app_linpath }}nomad/{{ nomad_version }}/"
+nomad_binary_linpath: "{{ bin_linpath }}nomad"
+nomad_config_linpath: "{{ nomad_app_linpath }}config/"
+nomad_data_linpath: "/cs/app/"
+nomad_log_linpath: "{{ nomad_app_linpath }}log/"
+nomad_start_args: "-config {{ nomad_config_linpath }}"
+nomad_zip_linpath: "{{ bin_linpath }}{{ nomad_zip }}"
+nomad_zip: "nomad_{{ nomad_version }}_linux_amd64.zip"
