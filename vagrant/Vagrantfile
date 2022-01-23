@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "win_server" do |win_server|
     win_server.vm.box = "devopsgroup-io/windows_server-2012r2-standard-amd64-nocm"
     win_server.vm.network "public_network"
-    win_server.vm.provision "shell", path: '.\ConfigureNetworkAdapter.ps1'
+    win_server.vm.provision "shell", path: '.\ConfigureRemotingForAnsible.ps1'
     win_server.vm.hostname = "winserver"
   end
 
