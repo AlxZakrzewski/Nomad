@@ -5,4 +5,7 @@
     - group_vars/linux.yml
   tasks:
     - include_tasks: roles/nomad/tasks/main.yml
-      tags: always
+      apply:
+        tags:
+          - setup
+          - enable_start
