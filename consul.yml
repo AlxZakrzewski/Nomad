@@ -4,7 +4,5 @@
   vars_files:
     - group_vars/linux.yml
   tasks:
-    - include: roles/consul/tasks/setup.yml
-      tags: setup
-    - include: roles/consul/tasks/service.yml
-      tags: service     
+    - include_tasks: roles/consul/tasks/main.yml
+      tags: always

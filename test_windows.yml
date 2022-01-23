@@ -6,5 +6,3 @@
   tasks:
     - include: roles/test_windows/tasks/copy.yml
       tags: copy
-    - include: roles/test_windows/tasks/housekeeping.yml
-      tags: housekeeping
