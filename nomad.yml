@@ -4,5 +4,5 @@
   vars_files:
     - group_vars/linux.yml
   tasks:
-    - include: roles/nomad/tasks/main.yml
+    - import_tasks: roles/nomad/tasks/main.yml
       tags: always

@@ -1,4 +1,4 @@
-- include_tasks: enable_start.yml
+- import_tasks: enable_start.yml
   tags: enable_start
-- include_tasks: setup.yml
+- import_tasks: setup.yml
   tags: setup
