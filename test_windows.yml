@@ -1,4 +1,3 @@
----
 - name: Copy file
   hosts: "{{ host_group }}"
   gather_facts: yes

@@ -1,5 +1,3 @@
----
-
 - name: Deploy consul
   gather_facts: yes
   hosts: "{{ host_group }}"
