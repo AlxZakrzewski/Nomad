@@ -15,5 +15,5 @@ Nomad.TEST:
 Windows:
   hosts:
     Windows.TEST:
-      ansible_host: "win_server"
+      ansible_host: "winserver"
       
