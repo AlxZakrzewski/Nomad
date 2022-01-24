@@ -37,6 +37,11 @@
     dest: "{{ bin_linpath }}"
     remote_src: yes
 
+- name: Remove compressed file
+  file: 
+    path: "{{ nomad_zip_linpath }}"
+    state: absent
+
 - name: Check Nomad executable is present 
   shell: "nomad --version"
   register: result
