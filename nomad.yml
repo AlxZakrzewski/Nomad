@@ -5,6 +5,7 @@
     - group_vars/linux.yml
   tasks:
     - name: Bootstrap the server
+      become: yes
       yum:
         name: unzip
         state: present
