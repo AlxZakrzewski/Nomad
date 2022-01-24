@@ -1,11 +1,11 @@
 - name: Enable Nomad service, and not touch the state
   become: yes
-  ansible.builtin.service:
+  service:
     name: nomad
     enabled: yes
 
 - name: Start Nomad service, if not started
   become: yes
-  ansible.builtin.service:
+  service:
     name: nomad
     state: started   

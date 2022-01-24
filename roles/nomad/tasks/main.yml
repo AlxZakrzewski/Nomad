@@ -1,4 +1,4 @@
-- import_tasks: enable_start.yml
+- import_tasks: roles/nomad/tasks/enable_start.yml
   tags: enable_start
-- import_tasks: setup.yml
+- import_tasks: roles/nomad/tasks/setup.yml
   tags: setup

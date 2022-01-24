@@ -4,5 +4,7 @@
   vars_files:
     - group_vars/linux.yml
   tasks:
-    - include_tasks: roles/consul/tasks/main.yml
-      tags: always
+    - name: Start consul role
+      include_role: 
+        name: consul
+      tags: always  
