@@ -10,7 +10,7 @@ addresses {
 }
 
 advertise {
-  http = "{{ GetInterfaceIP \"eth1\" }}"
-  rpc  = "{{ GetInterfaceIP \"eth1\" }}"
-  serf = "{{ GetInterfaceIP \"eth1\" }}"
+  http = "{% raw %}{{ GetInterfaceIP \"eth1\" }}{% endraw %}"
+  rpc  = "{% raw %}{{ GetInterfaceIP \"eth1\" }}{% endraw %}"
+  serf = "{% raw %}{{ GetInterfaceIP \"eth1\" }}{% endraw %}"
 }
