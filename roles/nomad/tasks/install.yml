@@ -9,6 +9,7 @@
     - "{{ nomad_log_linpath }}"
 
 - name: Create Nomad data directory
+  become: yes
   file:
     path: "{{ nomad_data_linpath }}"
     state: directory
