@@ -1,7 +1,7 @@
 - name: Copy remove_service.sh script
   copy:
     src: remove_service.sh
-    dest: "{{ nomad_path }}"
+    dest: "{{ nomad_path }}/"
     mode: 0777
 
 - name: Execute remove_service.sh script
