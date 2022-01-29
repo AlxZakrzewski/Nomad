@@ -9,5 +9,8 @@
 
 - name: Delete all Nomad files
   file:
-    path: "{{ nomad_path }}"
+    path: "{{ item }}"
     state: absent
+  loop:
+    - "{{ nomad_path }}"
+    - "{{ nomad_data_linpath }}"
