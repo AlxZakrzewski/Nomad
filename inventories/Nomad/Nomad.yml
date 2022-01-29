@@ -7,13 +7,18 @@ Nomad.TEST:
   hosts:
     nomad1.TEST:
       ansible_host: "nomad1"
+      nomad_client: True
+      nomad_server: True
     nomad2.TEST:
       ansible_host: "nomad2"
+      nomad_client: True
+      nomad_server: True
     nomad3.TEST:
       ansible_host: "nomad3"
+      nomad_client: True
+      nomad_server: True
 
 Windows:
   hosts:
     Windows.TEST:
       ansible_host: "winserver"
-      
