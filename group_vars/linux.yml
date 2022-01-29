@@ -1,4 +1,5 @@
 #---------------------------- Linux paths and files --------------------------#
+ansible_user: vagrant
 shell_files:
   bashrc:
     file: ".bashrc"
