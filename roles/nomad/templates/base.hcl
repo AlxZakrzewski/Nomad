@@ -11,4 +11,6 @@ addresses {
 
 advertise {
   http = "{{ GetInterfaceIP \"eth1\" }}"
+  rpc  = "{{ GetInterfaceIP \"eth1\" }}"
+  serf = "{{ GetInterfaceIP \"eth1\" }}"
 }
