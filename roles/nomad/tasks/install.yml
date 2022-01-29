@@ -13,7 +13,9 @@
   file:
     path: "{{ nomad_data_linpath }}"
     state: directory
-    mode: 1777
+    owner: "{{ nomad_user }}"
+    group: "{{ nomad_user }}"
+    mode: 0775
     recurse: yes
 
 - name: Register $PATH as var
