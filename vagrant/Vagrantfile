@@ -2,10 +2,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "nomad1" do |nomad1|
     nomad1.vm.box = "generic/centos7"
-    nomad1.vm.network "public_network", ip: "192.168.0.113"
-    nomad1.vm.network "forwarded_port", guest: 4646, host: 4646
-    nomad1.vm.network "forwarded_port", guest: 8500, host: 8500
+    nomad1.vm.network "public_network", ip: "192.168.0.101"
     nomad1.vm.hostname = "nomad1"
+    nomad1.vm.provision "shell", path: '.\firewall.sh'
     nomad1.vm.provision "file", source: '.\id_rsa.pub', destination: "~/.ssh/id_rsa.pub"
     nomad1.vm.provision "shell", inline: <<-SHELL
     cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
@@ -14,8 +13,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "nomad2" do |nomad2|
     nomad2.vm.box = "generic/centos7"
-    nomad2.vm.network "public_network", ip: "192.168.0.110"
+    nomad2.vm.network "public_network", ip: "192.168.0.102"
     nomad2.vm.hostname = "nomad2"
+    nomad2.vm.provision "shell", path: '.\firewall.sh'
     nomad2.vm.provision "file", source: '.\id_rsa.pub', destination: "~/.ssh/id_rsa.pub"
     nomad2.vm.provision "shell", inline: <<-SHELL
     cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
@@ -24,8 +24,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "nomad3" do |nomad3|
     nomad3.vm.box = "generic/centos7"
-    nomad3.vm.network "public_network", ip: "192.168.0.240"
+    nomad3.vm.network "public_network", ip: "192.168.0.103"
     nomad3.vm.hostname = "nomad3"
+    nomad3.vm.provision "shell", path: '.\firewall.sh'
     nomad3.vm.provision "file", source: '.\id_rsa.pub', destination: "~/.ssh/id_rsa.pub"
     nomad3.vm.provision "shell", inline: <<-SHELL
     cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
@@ -34,8 +35,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "win_server" do |win_server|
     win_server.vm.box = "devopsgroup-io/windows_server-2012r2-standard-amd64-nocm"
-    win_server.vm.network "public_network"
+    win_server.vm.network "public_network", bridge: "Ethernet 2"
     win_server.vm.provision "shell", path: '.\ConfigureRemotingForAnsible.ps1'
+    win_server.vm.provision "shell", path: '.\ConfigureNetworkAdapter.ps1'
     win_server.vm.hostname = "winserver"
   end
 

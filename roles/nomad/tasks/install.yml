@@ -88,6 +88,7 @@
 - name: Restart service nomad
   become: yes
   systemd:
+    enabled: yes
     state: restarted
     daemon_reload: yes
     name: nomad

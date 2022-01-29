@@ -4,14 +4,8 @@
   vars_files:
     - group_vars/linux.yml
   tasks:
-    - name: Bootstrap the server
-      become: yes
-      yum:
-        name: unzip
-        state: present
-      tags: always  
 
     - name: Start nomad role
-      include_role: 
+      include_role:
         name: nomad
-      tags: always  
+      tags: always

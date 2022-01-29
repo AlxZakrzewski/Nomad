@@ -1,0 +1,1 @@
+New-NetIPAddress -IPAddress 192.168.0.201 -DefaultGateway 192.168.0.1 -PrefixLength 24 -InterfaceAlias "Ethernet 2"
