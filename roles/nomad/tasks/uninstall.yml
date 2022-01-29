@@ -8,6 +8,7 @@
   command: "{{ nomad_path }}/remove_service.sh"
 
 - name: Delete all Nomad files
+  become: yes
   file:
     path: "{{ item }}"
     state: absent
