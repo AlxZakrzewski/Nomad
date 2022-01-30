@@ -1,4 +1,5 @@
 - name: Create Consul user
+  become: yes
   user:
     name: consul
     shell: /bin/false
