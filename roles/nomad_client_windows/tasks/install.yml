@@ -21,7 +21,7 @@
 
 - name: Extract and delete archive
   win_unzip:
-    src: "{{ nomad_zip_winpath }}"
+    src: "{{ nomad_zip }}"
     dest: "{{ nomad_binary_winpath }}"
     recurse: yes
     delete_archive: yes
