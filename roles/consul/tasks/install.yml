@@ -35,7 +35,7 @@
 
 - name: Add {{ consul_binary_linpath }} to .bashrc
   lineinfile:
-    dest: "{{ consul_user }}/.bashrc"
+    dest: "{{ consul_path }}/.bashrc"
     line: 'export PATH={{ consul_binary_linpath }}:$PATH'
     insertafter: EOF
 
