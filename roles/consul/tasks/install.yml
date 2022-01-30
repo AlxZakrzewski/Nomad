@@ -41,30 +41,24 @@
   when: consul_binary_linpath not in path_list
 
 - name: Download Consul zip file
+  become: yes
   get_url:
     url: "{{ consul_url }}"
     dest: "{{ consul_binary_linpath }}"
     mode: 0750
 
 - name: Uncompress source compressed file
+  become: yes
   unarchive:
     src: "{{ consul_zip_linpath }}"
     dest: "{{ consul_binary_linpath }}"
     remote_src: yes
 
 - name: Remove compressed file
+  become: yes
   file:
     path: "{{ consul_zip_linpath }}"
     state: absent
-
-- name: Check consul executable is present
-  shell: "consul --version"
-  register: result
-  ignore_errors: true
-
-- fail:
-    msg: "consul is not found!"
-  when: result.rc != 0
 
 - name: Important message
   debug:
