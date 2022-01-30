@@ -1,4 +1,4 @@
-- include_tasks: service.yml
-  tags: service
-- include_tasks: setup.yml
-  tags: setup
+- import_tasks: roles/consul/tasks/install.yml
+  tags: install
+- import_tasks: roles/consul/tasks/uninstall.yml
+  tags: uninstall

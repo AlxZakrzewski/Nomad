@@ -1,0 +1,34 @@
+- name: Copy base.hcl
+  template:
+    src: base.hcl
+    dest: "{{ consul_config_linpath }}/base.hcl"
+    mode: 0755
+
+- name: Copy client.hcl into consul Client
+  template:
+    src: client.hcl
+    dest: "{{ consul_config_linpath }}/client.hcl"
+    mode: 0755
+  when: consul_client
+
+- name: Copy server.hcl into consul Client
+  template:
+    src: server.hcl
+    dest: "{{ consul_config_linpath }}/server.hcl"
+    mode: 0755
+  when: consul_server
+
+- name: Copy consul.service
+  become: yes
+  template:
+    src: consul.service
+    dest: "/etc/systemd/system/consul.service"
+    mode: 0755
+
+- name: Start Consul service
+  become: yes
+  systemd:
+    enabled: yes
+    state: started
+    daemon_reload: yes
+    name: consul

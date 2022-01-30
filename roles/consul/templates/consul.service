@@ -3,18 +3,19 @@ Description="HashiCorp Consul - A service mesh solution"
 Documentation=https://www.consul.io/
 Requires=network-online.target
 After=network-online.target
-ConditionFileNotEmpty=/etc/consul.d/consul.hcl
+ConditionFileNotEmpty={{ consul_config_linpath }}/base.hcl
 
 [Service]
 Type=notify
-User=consul
-Group=consul
-ExecStart=/bin/bash -c "/cs/fiwmrisk/bin/consul agent -config-dir=/etc/consul.d/"
+ExecStart=/bin/bash -c "{{ consul_binary_linpath }}/consul agent -config-dir={{ consul_config_linpath }}"
 ExecReload=/bin/kill --signal HUP $MAINPID
 KillMode=process
 KillSignal=SIGTERM
 Restart=on-failure
 LimitNOFILE=65536
+
+User={{ consul_user }}
+Group={{ consul_user }}
 
 [Install]
 WantedBy=multi-user.target

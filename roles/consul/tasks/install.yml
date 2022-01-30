@@ -1,0 +1,68 @@
+- name: Create Consul user
+  user:
+    name: consul
+    shell: /bin/false
+    home: "{{ consul_path }}"
+
+- name: Create consul directories structure
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+  loop:
+    - "{{ consul_binary_linpath }}"
+    - "{{ consul_config_linpath }}"
+    - "{{ consul_log_linpath }}"
+
+- name: Create consul data directory
+  become: yes
+  file:
+    path: "{{ consul_data_linpath }}"
+    state: directory
+    recurse: yes
+    owner: "{{ consul_user }}"
+    group: "{{ consul_user }}"
+    mode: 0775
+
+- name: Register $PATH as var
+  shell: echo $PATH
+  register: path
+
+- set_fact:
+    path_list: "{{ path.stdout.split(':') }}"
+
+- name: Add {{ consul_binary_linpath }} to .bashrc
+  lineinfile:
+    dest: "{{ shell_files.bashrc.linpath }}"
+    line: 'export PATH={{ consul_binary_linpath }}:$PATH'
+    insertafter: EOF
+  when: consul_binary_linpath not in path_list
+
+- name: Download Consul zip file
+  get_url:
+    url: "{{ consul_url }}"
+    dest: "{{ consul_binary_linpath }}"
+    mode: 0750
+
+- name: Uncompress source compressed file
+  unarchive:
+    src: "{{ consul_zip_linpath }}"
+    dest: "{{ consul_binary_linpath }}"
+    remote_src: yes
+
+- name: Remove compressed file
+  file:
+    path: "{{ consul_zip_linpath }}"
+    state: absent
+
+- name: Check consul executable is present
+  shell: "consul --version"
+  register: result
+  ignore_errors: true
+
+- fail:
+    msg: "consul is not found!"
+  when: result.rc != 0
+
+- name: Important message
+  msg: "Setup the certificates and provide proper input in base.hcl - read setup_certs_consul.txt"
