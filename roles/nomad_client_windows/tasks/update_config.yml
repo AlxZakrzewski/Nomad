@@ -2,11 +2,13 @@
   win_template:
     src: base.hcl
     dest: "{{ nomad_config_winpath }}\\base.hcl"
+    force: yes
 
 - name: Copy client.hcl into Nomad Client
   win_template:
     src: client.hcl
     dest: "{{ nomad_config_winpath }}\\client.hcl"
+    force: yes
   when: nomad_client
 
 - name: Restart Nomad service
