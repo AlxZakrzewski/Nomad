@@ -1,5 +1,5 @@
 # Create certificates and copy them to Consul servers
-Steps:
+Steps: (You can do it on Ansible VM)
 
 1.Generate the gossip encryption key:
 
