@@ -38,7 +38,6 @@
     dest: "{{ consul_user }}/.bashrc"
     line: 'export PATH={{ consul_binary_linpath }}:$PATH'
     insertafter: EOF
-  when: consul_binary_linpath not in path_list
 
 - name: Download Consul zip file
   become: yes
