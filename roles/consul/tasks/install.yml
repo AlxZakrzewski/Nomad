@@ -53,12 +53,12 @@
 - set_fact:
     path_list: "{{ path.stdout.split(':') }}"
 
-- name: Add {{ nomad_binary_linpath }} to .bashrc
+- name: Add {{ consul_binary_linpath }} to .bashrc
   lineinfile:
     dest: "{{ shell_files.bashrc.linpath }}"
-    line: 'export PATH={{ nomad_binary_linpath }}:$PATH'
+    line: 'export PATH={{ consul_binary_linpath }}:$PATH'
     insertafter: EOF
-  when: nomad_binary_linpath not in path_list
+  when: consul_binary_linpath not in path_list
 
 - name: Important message
   debug:
