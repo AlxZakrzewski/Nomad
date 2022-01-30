@@ -1,0 +1,15 @@
+- name: Copy base.hcl
+  win_template:
+    src: base.hcl
+    dest: "{{ nomad_config_winpath }}\\base.hcl"
+
+- name: Copy client.hcl into Nomad Client
+  win_template:
+    src: client.hcl
+    dest: "{{ nomad_config_winpath }}\\client.hcl"
+  when: nomad_client
+
+- name: Restart Nomad service
+  win_service:
+    name: Nomad
+    state: restarted

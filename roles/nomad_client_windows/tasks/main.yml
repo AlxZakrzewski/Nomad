@@ -1,4 +1,6 @@
 - import_tasks: roles/nomad_client_windows/tasks/install.yml
   tags: install
+- import_tasks: roles/nomad_client_windows/tasks/update_config.yml
+  tags: update_config
 - import_tasks: roles/nomad_client_windows/tasks/uninstall.yml
   tags: uninstall
