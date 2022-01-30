@@ -9,4 +9,4 @@ consul_log_linpath: "{{ consul_app_linpath }}/log"
 consul_data_linpath: "/data/consul"
 
 consul_zip: "consul_{{ consul_version }}_linux_amd64.zip"
-consul_zip_linpath: "{{ consul_binary_linpath }}{{ consul_zip }}"
+consul_zip_linpath: "{{ consul_binary_linpath }}/{{ consul_zip }}"
