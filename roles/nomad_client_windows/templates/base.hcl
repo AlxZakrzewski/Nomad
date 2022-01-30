@@ -1,9 +1,9 @@
-data_dir = "'%{' {{ nomad_data_winpath }} '}%'"
+data_dir = "{% raw %} %{ {% endraw %} {{ nomad_data_winpath }} {% raw %} }% {% endraw %}"
 
 bind_addr = "0.0.0.0"
 
 log_level = "INFO"
-log_file = "'%{' {{ nomad_log_winpath }} '}%'"
+log_file = "{% raw %} %{ {% endraw %} {{ nomad_log_winpath }} {% raw %} }% {% endraw %}"
 
 addresses {
   http = "0.0.0.0"
