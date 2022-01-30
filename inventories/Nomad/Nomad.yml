@@ -1,7 +1,7 @@
 Nomad:
   children:
     Nomad.TEST:
-    Windows:
+    Windows.TEST:
 
 Nomad.TEST:
   hosts:
@@ -18,7 +18,7 @@ Nomad.TEST:
       nomad_client: True
       nomad_server: True
 
-Windows:
+Windows.TEST:
   hosts:
     Windows.TEST:
       ansible_host: "winserver"
