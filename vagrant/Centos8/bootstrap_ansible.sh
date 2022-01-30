@@ -8,6 +8,7 @@ pip install --upgrade pip
 
 # Install Ansible
 pip install ansible
+pip install pywinrm
 
 # Install Git
 sudo yum install -y git

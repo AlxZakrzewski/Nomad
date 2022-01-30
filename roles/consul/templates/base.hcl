@@ -9,7 +9,7 @@ verify_outgoing = true
 verify_server_hostname = true
 bind_addr="0.0.0.0"
 advertise_addr="{% raw %}{{ GetInterfaceIP \"eth1\" }}{% endraw %}"
-retry_join = ["192.168.0.101", "192.168.0.102", "192.168.0.103"]
+retry_join = ["192.168.1.101", "192.168.1.102", "192.168.1.103"]
 connect {
   enabled = true
 }
