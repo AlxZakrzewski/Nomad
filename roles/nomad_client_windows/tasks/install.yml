@@ -1,0 +1,48 @@
+- name: Create Nomad directories structure
+  win_file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+  loop:
+    - "{{ nomad_binary_winpath }}"
+    - "{{ nomad_config_winpath }}"
+    - "{{ nomad_log_winpath }}"
+
+- name: Create Nomad data directory
+  become: yes
+  win_file:
+    path: "{{ nomad_data_winpath }}"
+    state: directory
+    recurse: yes
+
+- name: Download Nomad zip file
+  win_get_url:
+    url: "{{ nomad_url }}"
+    dest: "{{ nomad_binary_winpath }}"
+
+- name: Extract and delete archive
+  win_unzip:
+    src: "{{ nomad_zip_winpath }}"
+    dest: "{{ nomad_binary_winpath }}"
+    recurse: yes
+    delete_archive: yes
+
+- name: Copy base.hcl
+  win_template:
+    src: base.hcl
+    dest: "{{ nomad_config_winpath }}/base.hcl"
+
+- name: Copy client.hcl into Nomad Client
+  win_template:
+    src: client.hcl
+    dest: "{{ nomad_config_winpath }}/client.hcl"
+  when: nomad_client
+
+- name: Create a Nomad service and start it
+  win_service:
+    name: Nomad
+    path: '{{ nomad_binary_winpath }}\nomad agent -config={{ nomad_config_winpath }}'
+    username: "{{ ansible_user }}"
+    password: "{{ ansible_password }}"
+    state: started
+    start_mode: auto

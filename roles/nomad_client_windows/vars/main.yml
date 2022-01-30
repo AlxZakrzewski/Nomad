@@ -1,0 +1,12 @@
+#---------------------------------- Overall ----------------------------------#
+nomad_url: "https://releases.hashicorp.com/nomad/{{ nomad_version }}/nomad_{{ nomad_version }}_windows_amd64.zip"
+
+nomad_path: '{{ ansible_user_dir }}\nomad_{{ nomad_version }}'
+nomad_app_winpath: '{{ nomad_path }}\app'
+nomad_binary_winpath: '{{ nomad_path }}\bin'
+nomad_config_winpath: '{{ nomad_app_winpath }}\config'
+nomad_log_winpath: '{{ nomad_app_winpath }}\log'
+nomad_data_winpath: 'c:\data\nomad'
+
+nomad_zip: 'nomad_{{ nomad_version }}_windows_amd64.zip'
+nomad_zip_winpath: '{{ nomad_binary_winpath }}\{{ nomad_zip }}'

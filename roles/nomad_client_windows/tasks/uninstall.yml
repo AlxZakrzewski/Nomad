@@ -1,0 +1,13 @@
+- name: Delete Nomad service
+  win_service:
+    name: Nomad
+    state: absent
+
+- name: Delete all Nomad files
+  become: yes
+  win_file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ nomad_path }}"
+    - "{{ nomad_data_winpath }}"

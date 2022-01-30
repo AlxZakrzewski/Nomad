@@ -1,8 +1,0 @@
-- name: Copy file
-  hosts: "{{ host_group }}"
-  gather_facts: yes
-  vars_files:
-    - group_vars/windows.yml
-  tasks:
-    - include: roles/test_windows/tasks/copy.yml
-      tags: copy
