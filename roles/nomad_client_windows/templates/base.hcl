@@ -1,9 +1,9 @@
-data_dir = "{{ nomad_data_winpath|safe }}"
+data_dir = "{{ nomad_data_winpath|e }}"
 
 bind_addr = "0.0.0.0"
 
 log_level = "INFO"
-log_file = "{{ nomad_log_winpath|safe }}"
+log_file = "{{ nomad_log_winpath|e }}"
 
 addresses {
   http = "0.0.0.0"
