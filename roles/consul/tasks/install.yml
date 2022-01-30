@@ -22,9 +22,9 @@
     path: "{{ consul_data_linpath }}"
     state: directory
     recurse: yes
-    owner: "{{ consul_user }}"
-    group: "{{ consul_user }}"
-    mode: 0775
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0777
 
 - name: Download Consul zip file
   become: yes

@@ -25,3 +25,6 @@ sudo tee -a /etc/hosts << END
 192.168.1.103 nomad3
 192.168.1.201 winserver
 END
+
+# Install unzip
+sudo yum install -y unzip

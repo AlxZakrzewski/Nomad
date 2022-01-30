@@ -1,6 +1,6 @@
 datacenter = "dc1"
 data_dir = "{{ consul_data_linpath }}"
-encrypt = "B1GJgjxm93FRdUojDTeqVCQb/77oYaNPh/GjN05stOc="
+encrypt = "IXVNU46GDJWDv6GbCpE7FBSVEQwXPrtYMyf6VEUafos="
 ca_file = "{{ consul_config_linpath}}/consul-agent-ca.pem"
 cert_file = "{{ consul_config_linpath}}/dc1-server-consul-0.pem"
 key_file = "{{ consul_config_linpath}}/dc1-server-consul-0-key.pem"

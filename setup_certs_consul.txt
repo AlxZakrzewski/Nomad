@@ -1,5 +1,5 @@
 # Create certificates and copy them to Consul servers
-Steps: (You can do it on Ansible VM)
+Steps: (You can do it on Ansible VM in root path of cloned repository - ansible-playbook consul.yml -i localhost -e consul_user=vagrant -e host_group=localhost -e consul_version=1.11.2 -t install)
 
 1.Generate the gossip encryption key:
 
@@ -15,6 +15,6 @@ consul tls cert create -server -dc dc1 -domain consul
 
 4. Transfer certificates to every Consul server
 
-scp consul-agent-ca.pem dc1-server-consul-0.pem dc1-server-consul-0-key.pem vagrant@nomad1:/home/vagrant/consul_1.11.2/app/config
-scp consul-agent-ca.pem dc1-server-consul-0.pem dc1-server-consul-0-key.pem vagrant@nomad2:/home/vagrant/consul_1.11.2/app/config
+scp consul-agent-ca.pem dc1-server-consul-0.pem dc1-server-consul-0-key.pem vagrant@nomad1:/home/vagrant/consul_1.11.2/app/config && \
+scp consul-agent-ca.pem dc1-server-consul-0.pem dc1-server-consul-0-key.pem vagrant@nomad2:/home/vagrant/consul_1.11.2/app/config && \
 scp consul-agent-ca.pem dc1-server-consul-0.pem dc1-server-consul-0-key.pem vagrant@nomad3:/home/vagrant/consul_1.11.2/app/config
