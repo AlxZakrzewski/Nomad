@@ -4,7 +4,6 @@
     state: absent
 
 - name: Delete all Nomad files
-  become: yes
   win_file:
     path: "{{ item }}"
     state: absent

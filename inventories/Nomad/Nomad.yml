@@ -20,6 +20,6 @@ Nomad.TEST:
 
 Windows.TEST:
   hosts:
-    Windows.TEST:
+    Windows1.TEST:
       ansible_host: "winserver"
       nomad_client: True

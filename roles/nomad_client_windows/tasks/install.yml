@@ -9,7 +9,6 @@
     - "{{ nomad_log_winpath }}"
 
 - name: Create Nomad data directory
-  become: yes
   win_file:
     path: "{{ nomad_data_winpath }}"
     state: directory
