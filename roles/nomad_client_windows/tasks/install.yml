@@ -25,15 +25,10 @@
     dest: "{{ nomad_binary_winpath }}"
     delete_archive: yes
 
-- name: Copy base.hcl
+- name: Copy client_win.hcl into Nomad Client
   win_template:
-    src: base.hcl
-    dest: "{{ nomad_config_winpath }}/base.hcl"
-
-- name: Copy client.hcl into Nomad Client
-  win_template:
-    src: client.hcl
-    dest: "{{ nomad_config_winpath }}/client.hcl"
+    src: client_win.hcl
+    dest: "{{ nomad_config_winpath }}/client_win.hcl"
   when: nomad_client
 
 - name: Add {{ ansible_user }} to Log on as a service
