@@ -6,6 +6,7 @@
     home: "{{ consul_path }}"
 
 - name: Create consul directories structure
+  become: yes
   file:
     path: "{{ item }}"
     state: directory
