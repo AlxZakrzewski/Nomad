@@ -65,4 +65,5 @@
   when: result.rc != 0
 
 - name: Important message
-  msg: "Setup the certificates and provide proper input in base.hcl - read setup_certs_consul.txt"
+  debug:
+    msg: "Setup the certificates and provide proper input in base.hcl - read setup_certs_consul.txt"
