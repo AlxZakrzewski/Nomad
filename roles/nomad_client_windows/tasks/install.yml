@@ -36,6 +36,13 @@
     dest: "{{ nomad_config_winpath }}/client.hcl"
   when: nomad_client
 
+- name: Add {{ ansible_user }} to Log on as a service
+  win_user_right:
+    name: SeServiceLogonRight
+    users:
+    - "{{ ansible_user }}"
+    action: add
+
 - name: Create a Nomad service and start it
   win_service:
     name: Nomad
