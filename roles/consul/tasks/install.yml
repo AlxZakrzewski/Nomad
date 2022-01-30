@@ -26,19 +26,6 @@
     group: "{{ consul_user }}"
     mode: 0775
 
-- name: Register $PATH as var
-  shell: echo $PATH
-  register: path
-
-- set_fact:
-    path_list: "{{ path.stdout.split(':') }}"
-
-- name: Add {{ consul_binary_linpath }} to .bashrc
-  lineinfile:
-    dest: "{{ consul_path }}/.bashrc"
-    line: 'export PATH={{ consul_binary_linpath }}:$PATH'
-    insertafter: EOF
-
 - name: Download Consul zip file
   become: yes
   get_url:
