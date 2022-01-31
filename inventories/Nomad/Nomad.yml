@@ -9,14 +9,17 @@ Nomad.TEST:
       ansible_host: "nomad1"
       nomad_client: True
       nomad_server: True
+      consul_server: True
     nomad2.TEST:
       ansible_host: "nomad2"
       nomad_client: True
       nomad_server: True
+      consul_server: True
     nomad3.TEST:
       ansible_host: "nomad3"
       nomad_client: True
       nomad_server: True
+      consul_server: True
 
 Windows.TEST:
   hosts:

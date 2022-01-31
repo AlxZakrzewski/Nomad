@@ -1,20 +1,31 @@
+- name: Change dirs permissions
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+    owner: "{{ consul_user }}"
+    group: "{{ consul_user }}"
+    mode: 0775
+  loop:
+    - "{{ consul_binary_linpath }}"
+    - "{{ consul_config_linpath }}"
+    - "{{ consul_log_linpath }}"
+
 - name: Copy base.hcl
   template:
     src: base.hcl
     dest: "{{ consul_config_linpath }}/base.hcl"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_user }}"
     mode: 0755
-
-- name: Copy client.hcl into consul Client
-  template:
-    src: client.hcl
-    dest: "{{ consul_config_linpath }}/client.hcl"
-    mode: 0755
-  when: consul_client
 
 - name: Copy server.hcl into consul Client
   template:
     src: server.hcl
     dest: "{{ consul_config_linpath }}/server.hcl"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_user }}"
     mode: 0755
   when: consul_server
 
