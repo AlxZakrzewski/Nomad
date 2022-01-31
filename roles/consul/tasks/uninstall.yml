@@ -1,11 +1,11 @@
 - name: Copy remove_service.sh script
   copy:
     src: remove_service.sh
-    dest: "{{ consul_path }}/"
+    dest: "{{ ansible_user_dir }}/"
     mode: 0777
 
 - name: Execute remove_service.sh script
-  command: "{{ consul_path }}/remove_service.sh"
+  command: "{{ ansible_user_dir }}/remove_service.sh"
 
 - name: Delete all consul files
   become: yes
@@ -15,3 +15,4 @@
   loop:
     - "{{ consul_path }}"
     - "{{ consul_data_linpath }}"
+    - "{{ ansible_user_dir }}/remove_service.sh"

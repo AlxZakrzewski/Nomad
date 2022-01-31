@@ -1,11 +1,11 @@
 - name: Copy remove_service.sh script
   copy:
     src: remove_service.sh
-    dest: "{{ nomad_path }}/"
+    dest: "{{ ansible_user_dir }}/"
     mode: 0777
 
 - name: Execute remove_service.sh script
-  command: "{{ nomad_path }}/remove_service.sh"
+  command: "{{ ansible_user_dir }}/remove_service.sh"
 
 - name: Delete all Nomad files
   become: yes
@@ -15,3 +15,4 @@
   loop:
     - "{{ nomad_path }}"
     - "{{ nomad_data_linpath }}"
+    - "{{ ansible_user_dir }}/remove_service.sh"
