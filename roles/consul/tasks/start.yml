@@ -2,16 +2,12 @@
   template:
     src: base.hcl
     dest: "{{ consul_config_linpath }}/base.hcl"
-    owner: "{{ consul_user }}"
-    group: "{{ consul_user }}"
     mode: 0755
 
 - name: Copy server.hcl into consul Client
   template:
     src: server.hcl
     dest: "{{ consul_config_linpath }}/server.hcl"
-    owner: "{{ consul_user }}"
-    group: "{{ consul_user }}"
     mode: 0755
   when: consul_server
 
