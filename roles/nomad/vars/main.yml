@@ -6,7 +6,7 @@ nomad_app_linpath: "{{ nomad_path }}/app"
 nomad_binary_linpath: "{{ nomad_path }}/bin"
 nomad_config_linpath: "{{ nomad_app_linpath }}/config"
 nomad_log_linpath: "{{ nomad_app_linpath }}/log"
-nomad_data_linpath: "/data/nomad"
+nomad_data_linpath: "/nomad"
 
 nomad_zip: "nomad_{{ nomad_version }}_linux_amd64.zip"
 nomad_zip_linpath: "{{ nomad_binary_linpath }}/{{ nomad_zip }}"

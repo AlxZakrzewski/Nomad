@@ -18,7 +18,6 @@ ssh-keygen -N '' -f ~/.ssh/id_rsa <<< y
 cat .ssh/id_rsa.pub
 
 # Create /etc/hosts entries
-
 sudo tee -a /etc/hosts << END
 192.168.1.101 nomad1
 192.168.1.102 nomad2
