@@ -6,7 +6,7 @@ consul_app_linpath: "{{ consul_path }}/app"
 consul_binary_linpath: "{{ consul_path }}/bin"
 consul_config_linpath: "{{ consul_app_linpath }}/config"
 consul_log_linpath: "{{ consul_app_linpath }}/log"
-consul_data_linpath: "/data/consul"
+consul_data_linpath: "/consul"
 
 consul_zip: "consul_{{ consul_version }}_linux_amd64.zip"
 consul_zip_linpath: "{{ consul_binary_linpath }}/{{ consul_zip }}"
