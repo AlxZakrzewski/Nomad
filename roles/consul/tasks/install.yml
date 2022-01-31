@@ -1,18 +1,11 @@
-- name: Create Consul user
-  become: yes
-  user:
-    name: consul
-    shell: /bin/false
-    home: "{{ consul_path }}"
-
 - name: Create consul directories structure
   become: yes
   file:
     path: "{{ item }}"
     state: directory
     recurse: yes
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_user }}"
     mode: 0775
   loop:
     - "{{ consul_binary_linpath }}"

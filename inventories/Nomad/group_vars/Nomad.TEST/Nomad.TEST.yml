@@ -1,4 +1,4 @@
 nomad_version: 1.2.4
 nomad_user: vagrant
 consul_version: 1.11.2
-consul_user: consul
+consul_user: vagrant
