@@ -1,6 +1,7 @@
 server = false
 datacenter = "dc1"
 data_dir = "{% raw %}c:\\consul{% endraw %}"
+ca_file = "{% raw %}c:\\Users\\{% endraw %}{{ ansible_user }}{% raw %}\\consul_{% endraw %}{{ consul_version }}{% raw %}\\app\\config\\{% endraw %}consul-agent-ca.pem"
 ui = true
 log_level = "INFO"
 enable_syslog = true

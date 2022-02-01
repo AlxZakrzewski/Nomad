@@ -26,6 +26,12 @@
     dest: "{{ consul_config_winpath }}\\client.hcl"
   when: consul_client
 
+- name: Copy consul-agent-ca.pem into Consul Client config dir
+  win_copy:
+    src: ../consul-agent-ca.pem
+    dest: "{{ consul_config_winpath }}\\consul-agent-ca.pem"
+  when: consul_client
+
 - name: Add {{ ansible_user }} to Log on as a service
   win_user_right:
     name: SeServiceLogonRight
