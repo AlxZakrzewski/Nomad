@@ -22,5 +22,5 @@ acl {
   enable_token_persistence = true
 }
 auto_encrypt {
-  tls = true
+  allow_tls = true
 }
