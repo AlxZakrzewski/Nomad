@@ -45,5 +45,5 @@
     path: "{{ consul_binary_winpath }}\\consul agent -config-dir={{ consul_config_winpath }}"
     username: "{{ ansible_user }}"
     password: "{{ ansible_password }}"
-    state: started
+    state: stopped
     start_mode: auto
