@@ -36,7 +36,7 @@
 - name: Create a consul service and start it
   win_service:
     name: consul
-    path: "{{ consul_binary_winpath }}\\consul agent -config={{ consul_config_winpath }}"
+    path: "{{ consul_binary_winpath }}\\consul agent -config-dir={{ consul_config_winpath }}"
     username: "{{ ansible_user }}"
     password: "{{ ansible_password }}"
     state: started
