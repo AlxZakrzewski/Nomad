@@ -2,3 +2,7 @@
   tags: install
 - import_tasks: roles/consul_client_windows/tasks/uninstall.yml
   tags: uninstall
+- import_tasks: roles/consul_client_windows/tasks/stop.yml
+  tags: stop
+- import_tasks: roles/consul_client_windows/tasks/start.yml
+  tags: start
