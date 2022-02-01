@@ -1,9 +1,11 @@
 server = false
 datacenter = "dc1"
 data_dir = "{% raw %}c:\\consul{% endraw %}"
-ui = true
+ui_config {
+  enabled = true
+}
 log_level = "INFO"
-log_file = "{% raw %}c:\\Users\\{% endraw %}{{ ansible_user }}{% raw %}\\consul_{% endraw %}{{ consul_version }}{% raw %}\\app\\log{% endraw %}"
+log_file = "{% raw %}c:\\Users\\{% endraw %}{{ ansible_user }}{% raw %}\\consul_{% endraw %}{{ consul_version }}{% raw %}\\app\\log\\{% endraw %}"
 retry_join = ["192.168.1.101", "192.168.1.102", "192.168.1.103"]
 bind_addr = "0.0.0.0"
 advertise_addr = "{% raw %}{{ GetInterfaceIP \"Ethernet 2\" }}{% endraw %}"
