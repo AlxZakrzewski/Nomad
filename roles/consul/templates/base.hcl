@@ -21,3 +21,6 @@ acl {
   default_policy = "allow"
   enable_token_persistence = true
 }
+auto_encrypt {
+  tls = true
+}
