@@ -1,0 +1,7 @@
+- name: Stop Consul service
+  win_service:
+    name: consul
+    username: "{{ ansible_user }}"
+    password: "{{ ansible_password }}"
+    state: stopped
+    start_mode: auto
