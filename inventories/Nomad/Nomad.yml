@@ -26,3 +26,4 @@ Windows.TEST:
     Windows1.TEST:
       ansible_host: "winserver"
       nomad_client: True
+      consul_client: True
