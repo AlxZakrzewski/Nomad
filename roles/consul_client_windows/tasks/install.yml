@@ -10,7 +10,6 @@
     - "{{ consul_data_winpath }}"
 
 - name: Download Consul zip file
-  become: yes
   win_get_url:
     url: "{{ consul_url }}"
     dest: "{{ consul_binary_winpath }}"
