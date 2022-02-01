@@ -1,49 +1,53 @@
 Vagrant.configure("2") do |config|
 
   config.vm.define "ansible" do |ansible|
-    ansible.vm.box = "generic/centos8"
+    ansible.vm.box = "rockylinux/8"
+    ansible.vm.box_version = "4.0.0"
     ansible.vm.network "private_network", ip: "192.168.1.100"
     ansible.vm.hostname = "ansible"
-    ansible.vm.provision "shell", path: '.\Centos8\bootstrap_ansible.sh'
+    ansible.vm.provision "shell", path: '.\RockyLinux\bootstrap_ansible.sh'
   end
 
   config.vm.define "nomad1" do |nomad1|
-    nomad1.vm.box = "generic/centos8"
+    nomad1.vm.box = "rockylinux/8"
+    nomad1.vm.box_version = "4.0.0"
     nomad1.vm.network "private_network", ip: "192.168.1.101"
     nomad1.vm.network "forwarded_port", guest: 4646, host: 4646
     nomad1.vm.network "forwarded_port", guest: 8500, host: 8500
     nomad1.vm.hostname = "nomad1"
-    nomad1.vm.provision "shell", path: '.\Centos8\bootstrap.sh'
-    nomad1.vm.provision "shell", path: '.\Centos8\firewall.sh'
-    nomad1.vm.provision "file", source: '.\Centos8\id_rsa.pub', destination: "~/.ssh/id_rsa.pub"
+    nomad1.vm.provision "shell", path: '.\RockyLinux\bootstrap.sh'
+    nomad1.vm.provision "shell", path: '.\RockyLinux\firewall.sh'
+    nomad1.vm.provision "file", source: '.\RockyLinux\id_rsa.pub', destination: "~/.ssh/id_rsa.pub"
     nomad1.vm.provision "shell", inline: <<-SHELL
     cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
   SHELL
   end
 
   config.vm.define "nomad2" do |nomad2|
-    nomad2.vm.box = "generic/centos8"
+    nomad2.vm.box = "rockylinux/8"
+    nomad2.vm.box_version = "4.0.0"
     nomad2.vm.network "private_network", ip: "192.168.1.102"
     nomad2.vm.network "forwarded_port", guest: 4646, host: 4645
     nomad2.vm.network "forwarded_port", guest: 8500, host: 8499
     nomad2.vm.hostname = "nomad2"
-    nomad2.vm.provision "shell", path: '.\Centos8\bootstrap.sh'
-    nomad2.vm.provision "shell", path: '.\Centos8\firewall.sh'
-    nomad2.vm.provision "file", source: '.\Centos8\id_rsa.pub', destination: "~/.ssh/id_rsa.pub"
+    nomad2.vm.provision "shell", path: '.\RockyLinux\bootstrap.sh'
+    nomad2.vm.provision "shell", path: '.\RockyLinux\firewall.sh'
+    nomad2.vm.provision "file", source: '.\RockyLinux\id_rsa.pub', destination: "~/.ssh/id_rsa.pub"
     nomad2.vm.provision "shell", inline: <<-SHELL
     cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
   SHELL
   end
 
   config.vm.define "nomad3" do |nomad3|
-    nomad3.vm.box = "generic/centos8"
+    nomad3.vm.box = "rockylinux/8"
+    nomad3.vm.box_version = "4.0.0"
     nomad3.vm.network "private_network", ip: "192.168.1.103"
     nomad3.vm.network "forwarded_port", guest: 4646, host: 4644
     nomad3.vm.network "forwarded_port", guest: 8500, host: 8498
     nomad3.vm.hostname = "nomad3"
-    nomad3.vm.provision "shell", path: '.\Centos8\bootstrap.sh'
-    nomad3.vm.provision "shell", path: '.\Centos8\firewall.sh'
-    nomad3.vm.provision "file", source: '.\Centos8\id_rsa.pub', destination: "~/.ssh/id_rsa.pub"
+    nomad3.vm.provision "shell", path: '.\RockyLinux\bootstrap.sh'
+    nomad3.vm.provision "shell", path: '.\RockyLinux\firewall.sh'
+    nomad3.vm.provision "file", source: '.\RockyLinux\id_rsa.pub', destination: "~/.ssh/id_rsa.pub"
     nomad3.vm.provision "shell", inline: <<-SHELL
     cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
   SHELL

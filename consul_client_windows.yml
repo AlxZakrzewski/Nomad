@@ -1,0 +1,10 @@
+- name: Deploy Consul Client installation on Windows
+  gather_facts: yes
+  hosts: "{{ host_group }}"
+  vars_files:
+    - group_vars/windows.yml
+  tasks:
+    - name: Start consul_client_windows role
+      include_role:
+        name: consul_client_windows
+      tags: always

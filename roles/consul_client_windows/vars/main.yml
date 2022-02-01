@@ -1,0 +1,13 @@
+#---------------------------------- Overall ----------------------------------#
+consul_url: "https://releases.hashicorp.com/consul/{{ consul_version }}/consul_{{ consul_version }}_windows_amd64.zip"
+
+consul_path: "{{ ansible_user_dir }}\\consul_{{ consul_version }}"
+consul_app_winpath: "{{ consul_path }}\\app"
+consul_binary_winpath: "{{ consul_path }}\\bin"
+consul_config_winpath: "{{ consul_app_winpath }}\\config"
+consul_log_winpath: "{{ consul_app_winpath }}\\log"
+
+consul_data_winpath: "c:\\consul"
+
+consul_zip: "consul_{{ consul_version }}_windows_amd64.zip"
+consul_zip_winpath: "{{ consul_binary_winpath }}\\{{ consul_zip }}"

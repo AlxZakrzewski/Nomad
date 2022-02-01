@@ -1,0 +1,44 @@
+- name: Create consul directories structure
+  win_file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+  loop:
+    - "{{ consul_binary_winpath }}"
+    - "{{ consul_config_winpath }}"
+    - "{{ consul_log_winpath }}"
+    - "{{ consul_data_winpath }}"
+
+- name: Download Consul zip file
+  become: yes
+  win_get_url:
+    url: "{{ consul_url }}"
+    dest: "{{ consul_binary_winpath }}"
+
+- name: Extract and delete archive
+  win_unzip:
+    src: "{{ consul_zip_winpath }}"
+    dest: "{{ consul_binary_winpath }}"
+    delete_archive: yes
+
+- name: Copy client.hcl into Consul Client
+  win_template:
+    src: client.hcl
+    dest: "{{ consul_config_winpath }}\\client.hcl"
+  when: consul_client
+
+- name: Add {{ ansible_user }} to Log on as a service
+  win_user_right:
+    name: SeServiceLogonRight
+    users:
+    - "{{ ansible_user }}"
+    action: add
+
+- name: Create a consul service and start it
+  win_service:
+    name: consul
+    path: "{{ consul_binary_winpath }}\\consul agent -config={{ consul_config_winpath }}"
+    username: "{{ ansible_user }}"
+    password: "{{ ansible_password }}"
+    state: started
+    start_mode: auto

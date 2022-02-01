@@ -58,4 +58,4 @@
 
 - name: Important message
   debug:
-    msg: "Setup the certificates and provide proper input in base.hcl - read setup_certs_consul.txt"
+    msg: "Setup the certificates and provide proper input in base.hcl - read README.md"

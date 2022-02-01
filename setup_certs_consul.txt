@@ -2,11 +2,12 @@
 Steps:
 
 You can do it on Ansible VM in root path of cloned repository -
-ansible-playbook consul.yml -i localhost  -e host_group=localhost -e consul_user=consul -e consul_version=1.11.2 -t install
+ansible-playbook consul.yml -i localhost  -e host_group=localhost -e consul_user=vagrant -e consul_version=1.11.2 -t install
 
 1.Generate the gossip encryption key:
 
-consul keygen - add output to base.hcl file - encrypt line
+source ~/.bashrc
+consul keygen - add output to roles/consul/templates/base.hcl file - encrypt line
 
 2.Create the Certificate Authority
 

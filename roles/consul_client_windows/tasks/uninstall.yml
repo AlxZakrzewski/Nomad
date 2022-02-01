@@ -1,0 +1,12 @@
+- name: Delete Consul service
+  win_service:
+    name: Consul
+    state: absent
+
+- name: Delete all Consul files
+  win_file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ consul_path }}"
+    - "{{ consul_data_winpath }}"
