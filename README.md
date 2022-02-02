@@ -38,26 +38,26 @@ ansible-playbook nomad.yml -i inventories/Nomad/Nomad.yml -e host_group=Nomad.TE
 ```console
 ansible-playbook nomad_client_windows.yml -i inventories/Nomad/Nomad.yml -e host_group=Windows.TEST -t install
 ```
-5. Deploy Consul servers cluster:
-```console
-ansible-playbook consul.yml -i inventories/Nomad/Nomad.yml -e host_group=Nomad.TEST -t install
-```
-6. Setup Consul certificates
+
+5. Setup Consul certificates
 ### Create certificates and copy them to Consul servers
 Steps:
 
 Install Consul on Ansible VM:
 ```console
+
 ansible-playbook consul.yml -i localhost  -e host_group=localhost -e consul_user=vagrant -e consul_version=1.11.2 -t install
 ```
 
 a. Generate the gossip encryption key:
 
 ```console
-source ~/.bashrc &&
+cd && source ~/.bashrc &&
 consul keygen
 ```
-- add output of <code>consul keygen</code> to roles/consul/templates/base.hcl file - encrypt line
+- add output of <code>consul keygen</code> to:
+  - roles/consul/templates/base.hcl file - encrypt line
+  - roles/consul_client_windows/templates/base.hcl file - encrypt line
 
 b. Create the Certificate Authority
 
@@ -71,15 +71,8 @@ c. Create the certificates
 consul tls cert create -server -dc dc1 -domain consul
 ```
 
-d. Transfer certificates to every Consul server
-
+6. Deploy Consul servers cluster:
 ```console
-scp consul-agent-ca.pem dc1-server-consul-0.pem dc1-server-consul-0-key.pem vagrant@nomad1:/home/vagrant/consul_1.11.2/app/config && \
-scp consul-agent-ca.pem dc1-server-consul-0.pem dc1-server-consul-0-key.pem vagrant@nomad2:/home/vagrant/consul_1.11.2/app/config && \
-scp consul-agent-ca.pem dc1-server-consul-0.pem dc1-server-consul-0-key.pem vagrant@nomad3:/home/vagrant/consul_1.11.2/app/config
-```
-
-7. Start Consul agents
-```console
-ansible-playbook consul.yml -i inventories/Nomad/Nomad.yml -e host_group=Nomad.TEST -t start
+cd Nomad/
+ansible-playbook consul.yml -i inventories/Nomad/Nomad.yml -e host_group=Nomad.TEST -t install
 ```
