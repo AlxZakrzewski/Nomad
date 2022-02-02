@@ -20,7 +20,7 @@ vagrant up ansible
 ```console
 vagrant ssh ansible
 
-cat .ssh/id_rsa.pub # copy the output and replace content of Centos8/id_rsa.pub file.
+cat .ssh/id_rsa.pub # copy the output and replace content of RockyLinux/id_rsa.pub file.
 ```
 3. Launch rest of VMs:
 ```console
@@ -45,7 +45,6 @@ Steps:
 
 Install Consul on Ansible VM:
 ```console
-
 ansible-playbook consul.yml -i localhost  -e host_group=localhost -e consul_user=vagrant -e consul_version=1.11.2 -t install
 ```
 
@@ -74,5 +73,5 @@ consul tls cert create -server -dc dc1 -domain consul
 6. Deploy Consul servers cluster:
 ```console
 cd Nomad/
-ansible-playbook consul.yml -i inventories/Nomad/Nomad.yml -e host_group=Nomad.TEST -t install
+ansible-playbook consul.yml -i inventories/Nomad/Nomad.yml -e host_group=Nomad.TEST -t install,start
 ```
