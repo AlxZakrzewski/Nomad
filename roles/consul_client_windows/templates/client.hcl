@@ -16,7 +16,7 @@ connect {
 verify_incoming = false
 verify_outgoing = true
 verify_server_hostname = true
-encrypt = "+8GgNratU7N8+zGbYN7mUrRB5TVCKLV7GgsvPnJJZOc="
+encrypt = "7e+D9xwAN1KZ8T/FnLLzWvJtxi1jnawkXZyLITnz64A="
 ca_file = "{% raw %}c:\\Users\\{% endraw %}{{ ansible_user }}{% raw %}\\consul_{% endraw %}{{ consul_version }}{% raw %}\\app\\config\\{% endraw %}consul-agent-ca.pem"
 auto_encrypt = {
   tls = true

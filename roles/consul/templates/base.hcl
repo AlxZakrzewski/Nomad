@@ -1,7 +1,7 @@
 datacenter = "dc1"
 data_dir = "{{ consul_data_linpath }}"
 #TLS
-encrypt = "+8GgNratU7N8+zGbYN7mUrRB5TVCKLV7GgsvPnJJZOc="
+encrypt = "7e+D9xwAN1KZ8T/FnLLzWvJtxi1jnawkXZyLITnz64A="
 verify_incoming = true
 verify_outgoing = true
 verify_server_hostname = true

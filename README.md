@@ -45,7 +45,7 @@ Steps:
 
 Install Consul on Ansible VM:
 ```console
-ansible-playbook consul.yml -i localhost  -e host_group=localhost -e consul_user=vagrant -e consul_version=1.11.2 -t install
+ansible-playbook consul.yml -i localhost -e host_group=localhost -e consul_user=vagrant -e consul_version=1.11.2 -t install
 ```
 
 a. Generate the gossip encryption key:
@@ -56,7 +56,7 @@ consul keygen
 ```
 - add output of <code>consul keygen</code> to:
   - roles/consul/templates/base.hcl file - encrypt line
-  - roles/consul_client_windows/templates/base.hcl file - encrypt line
+  - roles/consul_client_windows/templates/client.hcl file - encrypt line
 
 b. Create the Certificate Authority
 
@@ -75,3 +75,12 @@ consul tls cert create -server -dc dc1 -domain consul
 cd Nomad/
 ansible-playbook consul.yml -i inventories/Nomad/Nomad.yml -e host_group=Nomad.TEST -t install,start
 ```
+6. Deploy Consul Windows client:
+```console
+ansible-playbook consul_client_windows.yml -i inventories/Nomad/Nomad.yml -e host_group=Windows.TEST -t install,start
+```
+Now you should be able to visit Nomad and Consul ui on your Windows host:
+- Nomad: localhost:4646, localhost:4645, localhost:4644
+- Consul: localhost:8500, localhost:8499, localhost:8498
+
+Good luck with testing!
